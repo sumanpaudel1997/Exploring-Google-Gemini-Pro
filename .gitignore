@@ -1,7 +1,6 @@
 langchain.ipynb
 .env
 .gitignore
-langchain.ipynb
 image_llm.ipynb
 prompt_and_answer.csv
 google_llm.ipynb
