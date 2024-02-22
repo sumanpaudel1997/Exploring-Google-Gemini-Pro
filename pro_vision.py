@@ -14,10 +14,10 @@ model = genai.GenerativeModel('gemini-pro-vision')
 
 
 def get_gemini(prompt: str, image):
-    if prompt:
+    if prompt != '':
         response = model.generate_content([prompt, image])
-
-    response = model.generate_content(image)
+    else:
+        response = model.generate_content(image)
 
     return response.text
 
@@ -31,7 +31,7 @@ input_qa = st.text_input('Input: ', key='input')
 uploaded_file = st.file_uploader('Upload an Image:', type=['jpeg', 'jpg', 'png'])
 image = ''
 
-if not uploaded_file:
+if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image=image, caption='Your Uplaoded Image.', use_column_width=True)
 
