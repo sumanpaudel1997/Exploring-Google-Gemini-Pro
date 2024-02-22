@@ -14,6 +14,16 @@ model = genai.GenerativeModel('gemini-pro-vision')
 
 
 def get_gemini(prompt: str, image):
+    """ get the prompt and image from the users
+
+    Args:
+        prompt (str): Promt from the user to generate answer the given image
+        image (Image): image uploaded by the user
+
+    Returns:
+        text: returns the prompt's answer by gemini
+    """
+
     if prompt != '':
         response = model.generate_content([prompt, image])
     else:
@@ -31,13 +41,13 @@ input_qa = st.text_input('Input: ', key='input')
 uploaded_file = st.file_uploader('Upload an Image:', type=['jpeg', 'jpg', 'png'])
 image = ''
 
+# check if image is uplaoded 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image=image, caption='Your Uplaoded Image.', use_column_width=True)
 
+# submit
 submit = st.button('Tell me about the image')
-
-# after submit
 if submit:
     response = get_gemini(prompt=input_qa, image=image)
     st.subheader("Your Answer:")
